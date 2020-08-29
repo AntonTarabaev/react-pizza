@@ -46,6 +46,12 @@ textarea {
   overflow: auto;
 }
 
+.wrapper {
+  width: 93%;
+  max-width: $desktop-width;
+  margin: 50px auto;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

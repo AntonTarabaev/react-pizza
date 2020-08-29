@@ -1,13 +1,13 @@
-import "./scss/style.scss"
+import './scss/style.scss';
 
-import React from "react";
-import Header from "./components/header";
+import React from 'react';
+import Header from './components/header';
 
 function App() {
   return (
-    <>
-      <Header/>
-    </>
+    <div className="wrapper">
+      <Header />
+    </div>
   );
 }
 
