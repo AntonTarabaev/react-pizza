@@ -36,16 +36,17 @@ const Sort = () => {
           Сортировка:
         </b>
         <span className="sort__current" onClick={togglePopupVisibility}>
-          {filters[0]}
+          {filters[activeItem]}
         </span>
       </div>
       {isPopupVisible && (
         <ul className="sort__popup">
           {filters.map((it, i) => (
             <li
+              key={it + i}
               className={`sort__popup-item ${i === activeItem && `sort__popup-item--active`}`}
               onClick={() => onItemSelect(i)}>
-              {filters[i]}
+              {it}
             </li>
           ))}
         </ul>
