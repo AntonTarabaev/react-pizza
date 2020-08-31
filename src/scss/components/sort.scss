@@ -22,6 +22,12 @@
     border-width: 0 5px 6px 5px;
     border-color: transparent transparent $black transparent;
   }
+
+  &--rotated-mark {
+    &::after {
+      transform: rotate(180deg) translateY(3px);
+    }
+  }
 }
 
 .sort__current {
@@ -46,6 +52,8 @@
 
 .sort__popup-item {
   padding: 10px 15px;
+
+  cursor: pointer;
 
   &--active {
     color: $orange;
