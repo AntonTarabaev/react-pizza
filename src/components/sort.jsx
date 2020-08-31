@@ -2,18 +2,18 @@ import React from 'react';
 import { FilterTypes } from '../constants/main';
 
 const Sort = () => {
-  const [isPopupVisible, setPopupVisibility] = React.useState(false);
-  const [activeItem, setActiveItem] = React.useState(0);
-  const sortRef = React.useRef();
-
   const filters = Object.values(FilterTypes);
+
+  const [isPopupVisible, setPopupVisibility] = React.useState(false);
+  const [activeItem, setActiveItem] = React.useState(filters[0]);
+  const sortRef = React.useRef();
 
   const togglePopupVisibility = () => {
     setPopupVisibility(!isPopupVisible);
   };
 
-  const onItemSelect = (i) => {
-    setActiveItem(i);
+  const onItemSelect = (item) => {
+    setActiveItem(item);
     setPopupVisibility(false);
   };
 
@@ -36,7 +36,7 @@ const Sort = () => {
           Сортировка:
         </b>
         <span className="sort__current" onClick={togglePopupVisibility}>
-          {filters[activeItem]}
+          {activeItem}
         </span>
       </div>
       {isPopupVisible && (
@@ -44,8 +44,8 @@ const Sort = () => {
           {filters.map((it, i) => (
             <li
               key={it + i}
-              className={`sort__popup-item ${i === activeItem && `sort__popup-item--active`}`}
-              onClick={() => onItemSelect(i)}>
+              className={`sort__popup-item ${it === activeItem && `sort__popup-item--active`}`}
+              onClick={() => onItemSelect(it)}>
               {it}
             </li>
           ))}
