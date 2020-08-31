@@ -16,7 +16,10 @@ const Header = () => {
           <p className="logo__desc">самая вкусная пицца во вселенной</p>
         </div>
       </a>
-      <button className="button button--cart">Корзина</button>
+      <a className="button button--cart">
+        <span>873 ₽</span>
+        <span>3</span>
+      </a>
     </header>
   );
 };

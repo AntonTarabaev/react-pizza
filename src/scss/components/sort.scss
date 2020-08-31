@@ -1,0 +1,55 @@
+.sort {
+  position: relative;
+  margin-left: 20px;
+
+  font-size: 14px;
+}
+
+.sort__title {
+  position: relative;
+  margin-right: 8px;
+  padding-left: 17px;
+
+  &::after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 6px 5px;
+    border-color: transparent transparent $black transparent;
+  }
+}
+
+.sort__current {
+  color: $orange;
+
+  border-bottom: 1px dashed $orange;
+
+  cursor: pointer;
+}
+
+.sort__popup {
+  min-width: 140px;
+  padding: 10px 0;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+
+  background-color: #ffffff;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+  border-radius: 10px;
+}
+
+.sort__popup-item {
+  padding: 10px 15px;
+
+  &--active {
+    color: $orange;
+
+    background-color: rgba(254, 95, 30, 0.05);
+  }
+}

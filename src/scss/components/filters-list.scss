@@ -1,0 +1,12 @@
+.filters-list {
+  max-width: 80%;
+
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: flex;
+  overflow: auto;
+}
+
+.filters-list__item {
+  margin-right: 10px;
+}

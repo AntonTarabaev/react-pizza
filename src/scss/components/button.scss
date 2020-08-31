@@ -1,0 +1,110 @@
+.button {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 20px;
+
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: #ffffff;
+
+  border: 1px solid transparent;
+  border-radius: 30px;
+  background-color: $orange;
+
+  cursor: pointer;
+  user-select: none;
+
+  &:hover,
+  &:focus {
+    background-color: darken($orange, 5%);
+  }
+
+  &:active {
+    background-color: lighten($orange, 10%);
+  }
+
+  &--cart {
+    min-width: 140px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span:last-child {
+      position: relative;
+      padding-left: 30px;
+      margin-left: 20px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: calc(100% + 10px);
+        transform: translateY(-50%);
+        width: 1px;
+        height: 25px;
+
+        background-color: rgba(255, 255, 255, 0.25);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+
+        background-image: url("../img/cart.svg");
+      }
+    }
+  }
+
+  &--filter {
+    color: $black;
+
+    background-color: $gray;
+
+    &:hover,
+    &:focus {
+      background-color: darken($gray, 3%);
+    }
+
+    &:active {
+      background-color: darken($gray, 7%);
+    }
+
+    &.active {
+      color: #ffffff;
+
+      background-color: $black;
+    }
+  }
+
+  &--add {
+    color: $orange;
+
+    background-color: #ffffff;
+    border-color: $orange;
+
+    svg {
+      width: 12px;
+      height: 12px;
+      margin-right: 7px;
+    }
+
+    &:hover,
+    &:focus {
+      color: #ffffff;
+
+      background-color: $orange;
+
+      path {
+        fill: #ffffff;
+      }
+    }
+  }
+}
