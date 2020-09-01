@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { PizzaDough, PizzaSizes } from '../constants/main';
 
 const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
@@ -80,6 +81,14 @@ const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
       </div>
     </div>
   );
+};
+
+PizzaCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
 };
 
 export default PizzaCard;

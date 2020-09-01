@@ -1,4 +1,4 @@
-export const FilterTypes = {
+export const SortTypes = {
   POPULARITY: 'по популярности',
   PRICE: 'по цене',
   ALPHABET: `по алфавиту`,

@@ -1,15 +1,19 @@
 import React from 'react';
 import { FILTER_ALL_PIZZA } from '../constants/main';
-import { MOCK_DATA } from '../mock';
-
-const getUniqueFilters = (pizzaArr) => {
-  return [...new Set(pizzaArr.map((it) => it.category))];
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { changeActiveFilter } from '../actions/filters';
+import { getUniqueFilters } from '../utils/main';
 
 const Filter = () => {
-  const [activeItem, setActiveItem] = React.useState(FILTER_ALL_PIZZA);
+  const dispatch = useDispatch();
+  const activeItem = useSelector(({ filters }) => filters.filter);
+  const pizza = useSelector(({ data }) => data.pizza);
 
-  const filters = [FILTER_ALL_PIZZA, ...getUniqueFilters(MOCK_DATA)];
+  const filters = [FILTER_ALL_PIZZA, ...getUniqueFilters(pizza)];
+
+  const setActiveItem = (filter) => {
+    dispatch(changeActiveFilter(filter));
+  };
 
   return (
     <ul className="filters-list">

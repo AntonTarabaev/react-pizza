@@ -1,12 +1,19 @@
 import React from 'react';
-import { FilterTypes } from '../constants/main';
+import { SortTypes } from '../constants/main';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeSortType } from '../actions/filters';
 
 const Sort = () => {
-  const filters = Object.values(FilterTypes);
+  const filters = Object.values(SortTypes);
 
+  const dispatch = useDispatch();
+  const activeItem = useSelector(({ filters }) => filters.sortType);
   const [isPopupVisible, setPopupVisibility] = React.useState(false);
-  const [activeItem, setActiveItem] = React.useState(filters[0]);
   const sortRef = React.useRef();
+
+  const setActiveItem = (sortType) => {
+    dispatch(changeSortType(sortType));
+  };
 
   const togglePopupVisibility = () => {
     setPopupVisibility(!isPopupVisible);
