@@ -25,7 +25,9 @@ const Sort = () => {
   };
 
   const onOutsideClick = (evt) => {
-    !evt.path.includes(sortRef.current) && setPopupVisibility(false);
+    const path = evt.path || (evt.composedPath && evt.composedPath());
+
+    !path.includes(sortRef.current) && setPopupVisibility(false);
   };
 
   React.useEffect(() => {
