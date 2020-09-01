@@ -1,87 +1,64 @@
 import React from 'react';
+import { PizzaDough, PizzaSizes } from '../constants/main';
 
-const PizzaCard = () => {
+const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
+  const [price, setPrice] = React.useState(prices[1]);
+  const [dough, setDough] = React.useState(PizzaDough.THIN.ID);
+
+  const onPriceChange = (evt) => {
+    setPrice(prices[evt.target.value]);
+  };
+
+  const onDoughChange = (evt) => {
+    setDough(evt.target.value);
+  };
+
   return (
     <div className="pizza-card">
-      <img
-        className="pizza-card__image"
-        width="260"
-        height="260"
-        alt="Pizza card"
-        src="https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/6652fec1-04df-49d8-8744-232f1032c44b.jpg"
-      />
-      <h3 className="pizza-card__title">Чизбургер-пицца</h3>
-      <div className="pizza-card__selectors">
+      <img className="pizza-card__image" width="260" height="260" alt={name} src={imageUrl} />
+      <h3 className="pizza-card__title">{name}</h3>
+      <p className="pizza-card__description">{description}</p>
+      <form className="pizza-card__selectors">
         <ul className="pizza-card__selectors-list">
-          <li className="pizza-card__selectors-item">
-            <input
-              className="pizza-card__radio visually-hidden"
-              id="dough-thin"
-              name="dough"
-              value="thin"
-              type="radio"
-              defaultChecked
-            />
-            <label className="pizza-card__selector" htmlFor="dough-thin">
-              тонкое
-            </label>
-          </li>
-          <li className="pizza-card__selectors-item">
-            <input
-              className="pizza-card__radio visually-hidden"
-              id="dough-traditional"
-              name="dough"
-              value="traditional"
-              type="radio"
-            />
-            <label className="pizza-card__selector" htmlFor="dough-traditional">
-              традиционное
-            </label>
-          </li>
+          {Object.values(PizzaDough).map((it) => (
+            <li className="pizza-card__selectors-item" key={it.ID}>
+              <input
+                className="pizza-card__radio visually-hidden"
+                id={`dough-${id}-${it.ID}`}
+                name="dough"
+                value={it.ID}
+                type="radio"
+                checked={dough === it.ID}
+                onChange={onDoughChange}
+              />
+              <label className="pizza-card__selector" htmlFor={`dough-${id}-${it.ID}`}>
+                {it.TEXT}
+              </label>
+            </li>
+          ))}
         </ul>
 
         <ul className="pizza-card__selectors-list">
-          <li className="pizza-card__selectors-item">
-            <input
-              className="pizza-card__radio visually-hidden"
-              id="size-26"
-              name="size"
-              value="26"
-              type="radio"
-            />
-            <label className="pizza-card__selector" htmlFor="size-26">
-              26 см.
-            </label>
-          </li>
-          <li className="pizza-card__selectors-item">
-            <input
-              className="pizza-card__radio visually-hidden"
-              id="size-30"
-              name="size"
-              value="30"
-              type="radio"
-              defaultChecked
-            />
-            <label className="pizza-card__selector" htmlFor="size-30">
-              30 см.
-            </label>
-          </li>
-          <li className="pizza-card__selectors-item">
-            <input
-              className="pizza-card__radio visually-hidden"
-              id="size-40"
-              name="size"
-              value="40"
-              type="radio"
-            />
-            <label className="pizza-card__selector" htmlFor="size-40">
-              40 см.
-            </label>
-          </li>
+          {Object.values(PizzaSizes).map((it) => (
+            <li className="pizza-card__selectors-item" key={`pizza-size-${it.ID}`}>
+              <input
+                className="pizza-card__radio visually-hidden"
+                id={`size-${id}-${it.ID}`}
+                name="size"
+                value={it.ID}
+                type="radio"
+                checked={prices[it.ID] === price}
+                onChange={onPriceChange}
+              />
+              <label className="pizza-card__selector" htmlFor={`size-${id}-${it.ID}`}>
+                {it.TEXT}
+              </label>
+            </li>
+          ))}
         </ul>
-      </div>
+      </form>
       <div className="pizza-card__bottom">
-        <p className="pizza-card__price">803 ₽</p>
+        <p className="pizza-card__price">{price} ₽</p>
         <button className="button button--add">
           <svg
             width="10"

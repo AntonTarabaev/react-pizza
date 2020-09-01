@@ -27,6 +27,7 @@
 
   &--cart {
     min-width: 140px;
+    padding: 15px 25px;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -64,6 +65,8 @@
   }
 
   &--filter {
+    padding: 13px 30px;
+
     color: $black;
 
     background-color: $gray;
