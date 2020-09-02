@@ -22,6 +22,8 @@
   }
 
   &:active {
+    transform: translateY(1px);
+
     background-color: lighten($orange, 10%);
   }
 
@@ -33,9 +35,18 @@
     justify-content: space-between;
     align-items: center;
 
+    svg {
+      margin-right: 12px;
+
+      path {
+        stroke: #ffffff;
+      }
+    }
+
     span:last-child {
+      display: flex;
+      align-items: center;
       position: relative;
-      padding-left: 30px;
       margin-left: 20px;
 
       &::before {
@@ -49,18 +60,12 @@
 
         background-color: rgba(255, 255, 255, 0.25);
       }
+    }
+  }
 
-      &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        width: 18px;
-        height: 18px;
-
-        background-image: url("../img/cart.svg");
-      }
+  &--full-cart {
+    path {
+      stroke: $black;
     }
   }
 
@@ -107,6 +112,124 @@
 
       path {
         fill: #ffffff;
+      }
+    }
+  }
+
+  &--trash {
+    padding: 0;
+    display: flex;
+    align-items: center;
+
+    color: #B6B6B6;
+    font-weight: 400;
+
+    background-color: transparent;
+
+    svg {
+      margin-right: 7px;
+    }
+
+    &:hover,
+    &:focus {
+      color: darken(#B6B6B6, 25%);
+
+      background-color: transparent;
+
+      path {
+        stroke: darken(#B6B6B6, 25%);
+      }
+    }
+
+    &:active {
+      color: lighten(#B6B6B6, 10%);
+
+      background-color: transparent;
+
+      path {
+        stroke: lighten(#B6B6B6, 10%);
+      }
+    }
+  }
+
+  &--rounded {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+
+    background-color: #ffffff;
+    border-radius: 50%;
+    border: 2px solid $orange;
+
+    path {
+      fill: $orange;
+    }
+
+    &:hover,
+    &:focus {
+      border-color: darken($orange, 5%);
+
+      path {
+        fill: #ffffff;
+      }
+    }
+
+    &:active {
+      border-color: lighten($orange, 10%);
+    }
+  }
+
+  &--gray {
+    border-color: #D7D7D7;
+
+    svg {
+      transform: rotate(45deg);
+    }
+
+    path {
+      fill: #D7D7D7;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $black;
+      border-color: $black;
+    }
+
+    &:active {
+      background-color: lighten($black, 15%);
+      border-color: lighten($black, 15%);
+    }
+  }
+
+  &--checkout {
+    padding: 15px 40px;
+
+    font-weight: 400;
+  }
+
+  &--back {
+    display: flex;
+    align-items: center;
+
+    color: #D3D3D3;
+
+    background-color: transparent;
+    border-color: #D3D3D3;
+
+    svg {
+      margin-right: 12px;
+    }
+
+    &:hover,
+    &:focus {
+      color: #ffffff;
+
+      border-color: $black;
+      background-color: $black;
+
+      path {
+        stroke: #ffffff;
       }
     }
   }
