@@ -1,7 +1,8 @@
 import React from 'react';
-import { SortTypes } from '../constants/main';
+import { SortTypes } from '../../constants/main';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeSortType } from '../actions/filters';
+import { changeSortType } from '../../actions/filters';
+import SortItem from './sort-item';
 
 const Sort = () => {
   const filters = Object.values(SortTypes);
@@ -11,18 +12,17 @@ const Sort = () => {
   const [isPopupVisible, setPopupVisibility] = React.useState(false);
   const sortRef = React.useRef();
 
-  const setActiveItem = (sortType) => {
-    dispatch(changeSortType(sortType));
-  };
-
   const togglePopupVisibility = () => {
     setPopupVisibility(!isPopupVisible);
   };
 
-  const onItemSelect = (item) => {
-    setActiveItem(item);
-    setPopupVisibility(false);
-  };
+  const onItemSelect = React.useCallback(
+    (sortType) => {
+      dispatch(changeSortType(sortType));
+      setPopupVisibility(false);
+    },
+    [dispatch],
+  );
 
   const onOutsideClick = (evt) => {
     const path = evt.path || (evt.composedPath && evt.composedPath());
@@ -51,12 +51,12 @@ const Sort = () => {
       {isPopupVisible && (
         <ul className="sort__popup">
           {filters.map((it, i) => (
-            <li
+            <SortItem
               key={it + i}
-              className={`sort__popup-item ${it === activeItem && `sort__popup-item--active`}`}
-              onClick={() => onItemSelect(it)}>
-              {it}
-            </li>
+              filter={it}
+              activeItem={activeItem}
+              onItemSelect={onItemSelect}
+            />
           ))}
         </ul>
       )}

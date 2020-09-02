@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PizzaDough, PizzaSizes } from '../constants/main';
+import { PizzaDough, PizzaSizes } from '../../constants/main';
+import PizzaCardSelector from './pizza-card-selector';
 
 const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
   const [price, setPrice] = React.useState(prices[1]);
   const [dough, setDough] = React.useState(PizzaDough.THIN.ID);
 
-  const onPriceChange = (evt) => {
-    setPrice(prices[evt.target.value]);
-  };
+  const onPriceChange = React.useCallback(
+    (value) => {
+      setPrice(prices[value]);
+    },
+    [prices],
+  );
 
-  const onDoughChange = (evt) => {
-    setDough(evt.target.value);
-  };
+  const onDoughChange = React.useCallback((value) => {
+    setDough(value);
+  }, []);
 
   return (
     <div className="pizza-card">
@@ -22,39 +26,27 @@ const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
       <form className="pizza-card__selectors">
         <ul className="pizza-card__selectors-list">
           {Object.values(PizzaDough).map((it) => (
-            <li className="pizza-card__selectors-item" key={it.ID}>
-              <input
-                className="pizza-card__radio visually-hidden"
-                id={`dough-${id}-${it.ID}`}
-                name="dough"
-                value={it.ID}
-                type="radio"
-                checked={dough === it.ID}
-                onChange={onDoughChange}
-              />
-              <label className="pizza-card__selector" htmlFor={`dough-${id}-${it.ID}`}>
-                {it.TEXT}
-              </label>
-            </li>
+            <PizzaCardSelector
+              key={`${it.ID}-${id}`}
+              isChecked={dough === it.ID}
+              label="dough"
+              onChange={onDoughChange}
+              selector={it}
+              pizzaId={id}
+            />
           ))}
         </ul>
 
         <ul className="pizza-card__selectors-list">
           {Object.values(PizzaSizes).map((it) => (
-            <li className="pizza-card__selectors-item" key={`pizza-size-${it.ID}`}>
-              <input
-                className="pizza-card__radio visually-hidden"
-                id={`size-${id}-${it.ID}`}
-                name="size"
-                value={it.ID}
-                type="radio"
-                checked={prices[it.ID] === price}
-                onChange={onPriceChange}
-              />
-              <label className="pizza-card__selector" htmlFor={`size-${id}-${it.ID}`}>
-                {it.TEXT}
-              </label>
-            </li>
+            <PizzaCardSelector
+              key={`pizza-size-${it.ID}`}
+              isChecked={prices[it.ID] === price}
+              label="size"
+              onChange={onPriceChange}
+              selector={it}
+              pizzaId={id}
+            />
           ))}
         </ul>
       </form>
