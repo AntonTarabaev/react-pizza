@@ -3,13 +3,11 @@ import PizzaCard from '../components/pizza-card/pizza-card';
 import Sort from '../components/sort/sort';
 import Filter from '../components/filter/filter';
 import { SortTypes } from '../constants/main';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadPizza } from '../actions/data';
+import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { getPizzaByFilter, sortPizza } from '../utils/main';
 
 const Main = () => {
-  const dispatch = useDispatch();
   const isLoaded = useSelector(({ data }) => data.isLoaded);
   const filter = useSelector(({ filters }) => filters.filter);
 
@@ -23,10 +21,6 @@ const Main = () => {
   );
 
   const filteredPizza = useSelector(getFilteredPizza);
-
-  React.useEffect(() => {
-    dispatch(loadPizza());
-  }, [dispatch]);
 
   return (
     <section className="catalog">

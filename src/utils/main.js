@@ -23,3 +23,15 @@ export const sortPizza = (pizza, sortType) => {
       return pizza;
   }
 };
+
+export const calculateTotalCount = (pizzaArr) => {
+  return pizzaArr.reduce((acc, it) => {
+    return acc + it.count;
+  }, 0);
+};
+
+export const calculateTotalPrice = (pizzaArr) => {
+  return pizzaArr.reduce((acc, it) => {
+    return acc + it.count * it.price;
+  }, 0);
+};

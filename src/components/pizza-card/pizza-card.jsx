@@ -2,17 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PizzaDough, PizzaSizes } from '../../constants/main';
 import PizzaCardSelector from './pizza-card-selector';
+import { useDispatch } from 'react-redux';
+import { addItem, calculateCountAndPrice } from '../../actions/cart';
 
 const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
-  const [price, setPrice] = React.useState(prices[1]);
-  const [dough, setDough] = React.useState(PizzaDough.THIN.ID);
+  const dispatch = useDispatch();
+  const [size, setSize] = React.useState(PizzaSizes.MEDIUM);
+  const [dough, setDough] = React.useState(PizzaDough.THIN);
 
-  const onPriceChange = React.useCallback(
-    (value) => {
-      setPrice(prices[value]);
-    },
-    [prices],
-  );
+  const onAddClick = () => {
+    dispatch(
+      addItem({
+        id: `${id}-${dough.ID}-${size.ID}`,
+        name,
+        imageUrl,
+        price: prices[size.ID],
+        dough: dough.TEXT,
+        size: size.TEXT,
+      }),
+    );
+    dispatch(calculateCountAndPrice());
+  };
+
+  const onSizeChange = React.useCallback((value) => {
+    setSize(value);
+  }, []);
 
   const onDoughChange = React.useCallback((value) => {
     setDough(value);
@@ -28,7 +42,7 @@ const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
           {Object.values(PizzaDough).map((it) => (
             <PizzaCardSelector
               key={`${it.ID}-${id}`}
-              isChecked={dough === it.ID}
+              isChecked={dough.ID === it.ID}
               label="dough"
               onChange={onDoughChange}
               selector={it}
@@ -41,9 +55,9 @@ const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
           {Object.values(PizzaSizes).map((it) => (
             <PizzaCardSelector
               key={`pizza-size-${it.ID}`}
-              isChecked={prices[it.ID] === price}
+              isChecked={prices[it.ID] === prices[size.ID]}
               label="size"
-              onChange={onPriceChange}
+              onChange={onSizeChange}
               selector={it}
               pizzaId={id}
             />
@@ -51,8 +65,8 @@ const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
         </ul>
       </form>
       <div className="pizza-card__bottom">
-        <p className="pizza-card__price">{price} ₽</p>
-        <button className="button button--add">
+        <p className="pizza-card__price">{prices[size.ID]} ₽</p>
+        <button className="button button--add" onClick={onAddClick}>
           <svg
             width="10"
             height="10"

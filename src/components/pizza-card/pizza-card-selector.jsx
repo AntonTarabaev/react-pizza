@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const PizzaCardSelector = ({ selector, pizzaId, isChecked, label, onChange }) => {
   const handleChange = () => {
-    onChange(selector.ID);
+    onChange(selector);
   };
 
   return (

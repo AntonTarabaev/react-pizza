@@ -1,11 +1,20 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeAllItems } from '../actions/cart';
 
 const Cart = () => {
+  const dispatch = useDispatch();
+  const { totalCount, totalPrice } = useSelector(({ cart }) => cart);
+
+  const onTrashClick = () => {
+    dispatch(removeAllItems());
+  };
+
   return (
     <section className="cart">
       <div className="cart__top">
         <h2 className="cart__title">Корзина</h2>
-        <button className="button button--trash">
+        <button className="button button--trash" onClick={onTrashClick}>
           <svg
             width="20"
             height="20"
@@ -97,10 +106,10 @@ const Cart = () => {
       </ul>
       <div className="cart__total">
         <p className="cart__text">
-          Всего пицц: <span className="cart__count">3 шт.</span>
+          Всего пицц: <span className="cart__count">{totalCount} шт.</span>
         </p>
         <p className="cart__text">
-          Сумма заказа: <span className="cart__price">900 ₽</span>
+          Сумма заказа: <span className="cart__price">{totalPrice} ₽</span>
         </p>
       </div>
       <div className="cart__buttons">
