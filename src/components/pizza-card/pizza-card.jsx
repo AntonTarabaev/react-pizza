@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PizzaDough, PizzaSizes } from '../../constants/main';
 import PizzaCardSelector from './pizza-card-selector';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem, calculateCountAndPrice } from '../../actions/cart';
 
 const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
@@ -10,10 +10,13 @@ const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
   const [size, setSize] = React.useState(PizzaSizes.MEDIUM);
   const [dough, setDough] = React.useState(PizzaDough.THIN);
 
+  const fullId = `${id}-${dough.ID}-${size.ID}`;
+  const count = useSelector(({ cart }) => (cart.items[fullId] ? cart.items[fullId].count : null));
+
   const onAddClick = () => {
     dispatch(
       addItem({
-        id: `${id}-${dough.ID}-${size.ID}`,
+        id: fullId,
         name,
         imageUrl,
         price: prices[size.ID],
@@ -83,6 +86,7 @@ const PizzaCard = ({ id, imageUrl, name, description, prices }) => {
             />
           </svg>
           Добавить
+          {count && <span className="button__count">{count}</span>}
         </button>
       </div>
     </div>

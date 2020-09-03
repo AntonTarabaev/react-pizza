@@ -93,6 +93,10 @@
   }
 
   &--add {
+    display: flex;
+    align-items: center;
+    height: 44px;
+
     color: $orange;
 
     background-color: #ffffff;
@@ -112,6 +116,12 @@
 
       path {
         fill: #ffffff;
+      }
+
+      .button__count {
+        color: $orange;
+
+        background-color: #ffffff;
       }
     }
   }
@@ -233,4 +243,19 @@
       }
     }
   }
+}
+
+.button__count {
+  display: block;
+
+  min-width: 22px;
+  height: 22px;
+  margin-left: 10px;
+  padding: 1px 2px;
+
+  color: #ffffff;
+  text-align: center;
+
+  border-radius: 50%;
+  background-color: $orange;
 }
