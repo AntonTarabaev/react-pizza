@@ -6,6 +6,7 @@ import { SortTypes } from '../constants/main';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { getPizzaByFilter, sortPizza } from '../utils/main';
+import Loader from '../components/pizza-card/loader';
 
 const Main = () => {
   const isLoaded = useSelector(({ data }) => data.isLoaded);
@@ -32,11 +33,9 @@ const Main = () => {
       <h2 className="catalog__title">{filter} пиццы</h2>
 
       <div className="catalog__pizza-list">
-        {isLoaded ? (
-          filteredPizza.map((it) => <PizzaCard key={it.imageUrl} {...it} />)
-        ) : (
-          <h2>Loading... Please wait</h2>
-        )}
+        {isLoaded
+          ? filteredPizza.map((it) => <PizzaCard key={it.imageUrl} {...it} />)
+          : new Array(12).fill('').map((_, i) => <Loader key={i + 42} />)}
       </div>
     </section>
   );

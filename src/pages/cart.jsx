@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeAllItems } from '../actions/cart';
 import CartItem from '../components/cart-item';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -79,7 +80,7 @@ const Cart = () => {
         </p>
       </div>
       <div className="cart__buttons">
-        <button className="button button--checkout button--back">
+        <Link to="/" className="button button--checkout button--back">
           <svg
             width="8"
             height="14"
@@ -95,7 +96,7 @@ const Cart = () => {
             />
           </svg>
           Вернуться назад
-        </button>
+        </Link>
         <button className="button button--checkout">Оплатить сейчас</button>
       </div>
     </section>
