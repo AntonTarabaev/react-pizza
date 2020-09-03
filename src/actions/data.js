@@ -12,7 +12,7 @@ export const setPizza = (pizza) => ({
 });
 
 export const loadPizza = () => (dispatch) => {
-  axios.get('http://localhost:3000/db.json').then(({ data }) => {
+  axios.get('http://localhost:3001/pizza').then(({ data }) => {
     dispatch(setPizza(data));
     dispatch(setLoadedStatus(true));
   });
