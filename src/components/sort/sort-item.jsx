@@ -21,4 +21,4 @@ SortItem.propTypes = {
   onItemSelect: PropTypes.func.isRequired,
 };
 
-export default SortItem;
+export default React.memo(SortItem);

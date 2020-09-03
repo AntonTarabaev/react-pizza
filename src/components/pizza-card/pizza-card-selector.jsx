@@ -35,4 +35,4 @@ PizzaCardSelector.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default PizzaCardSelector;
+export default React.memo(PizzaCardSelector);

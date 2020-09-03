@@ -23,4 +23,4 @@ FilterItem.propTypes = {
   onFilterClick: PropTypes.func.isRequired,
 };
 
-export default FilterItem;
+export default React.memo(FilterItem);

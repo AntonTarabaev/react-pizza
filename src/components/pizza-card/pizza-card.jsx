@@ -101,4 +101,4 @@ PizzaCard.propTypes = {
   prices: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
 };
 
-export default PizzaCard;
+export default React.memo(PizzaCard);
