@@ -32,6 +32,20 @@
   }
 }
 
+.cart__text {
+  &--empty {
+    text-align: center;
+    font-size: 18px;
+  }
+}
+
+.cart__image {
+  display: block;
+  width: 400px;
+  height: 340px;
+  margin: 30px auto;
+}
+
 .cart__total {
   margin-top: 10px;
   margin-bottom: 40px;
